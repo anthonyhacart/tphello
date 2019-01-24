@@ -20,7 +20,7 @@ class UserActionControllerTest extends WebTestCase{
         $firewallName = 'main';
         $firewallContext = 'main';
 
-        $token = new UsernamePasswordToken('user@user.fr', 'user', $firewallName, ['ROLE_USER']);
+        $token = new UsernamePasswordToken('user@user.fr', 'user@user.fr', $firewallName, ['ROLE_USER']);
         $session->set('_security_'.$firewallContext, serialize($token));
         $session->save();
 
@@ -49,7 +49,7 @@ class UserActionControllerTest extends WebTestCase{
     {
         $this->logIn();
 
-        $this->client->request('GET', '/user-action/reload/1');
+        $this->client->request('GET', '/user-action/reload/10');
 
         $this->assertEquals(302,  $this->client->getResponse()->getStatusCode());
     }
@@ -58,7 +58,7 @@ class UserActionControllerTest extends WebTestCase{
     {
         $this->logIn();
 
-        $this->client->request('GET', '/user-action/load/1');
+        $this->client->request('GET', '/user-action/load/10');
 
         $this->assertEquals(302,  $this->client->getResponse()->getStatusCode());
     }
@@ -67,9 +67,14 @@ class UserActionControllerTest extends WebTestCase{
     {
         $this->logIn();
 
-        $this->client->request('GET', '/user-action/shoot/3');
+        $this->client->request('GET', '/user-action/shoot/21');
 
         $this->assertEquals(302,  $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testHeal()
+    {
+
     }
 
 }

@@ -19,8 +19,6 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 class LoadWeaponTest extends TestCase{
 
     private function initLoadWeapon($repoData){
-
-
         $repo = $this->createMock(ServiceEntityRepository::class);
         $repo->expects($this->once())
             ->method('findBy')

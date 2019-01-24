@@ -6,9 +6,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Weapon;
 use App\Entity\WeaponUser;
+use App\Service\WeaponUser\HealUser;
 use App\Service\WeaponUser\LoadWeapon;
 use App\Service\WeaponUser\ReloadWeapon;
 use App\Service\WeaponUser\ShootWeapon;
+use App\Service\WeaponUser\StowWeapon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,12 +59,35 @@ class UserActionController extends AbstractController
     }
 
     /**
-     * @Route("/shoot/{id}", name="user_action_shoot", methods="GET")
+     * @Route("/shoot/{id}", name="user_action_shoot", methods="GET", defaults={"id"=null})
+     * @return Response
      */
     public function shoot(User $user, ShootWeapon $shootWeapon): Response
     {
         $shootWeapon->shoot($user);
 
+        return $this->redirectToRoute('user_action_index');
+    }
+
+    /**
+     * @param WeaponUser $weaponUser
+     * @param StowWeapon $stowWeapon
+     * @Route("/stow/{id}", name="user_action_stow", methods="GET")
+     */
+    public function stow(WeaponUser $weaponUser, StowWeapon $stowWeapon){
+        $stowWeapon->stow($weaponUser);
+
+        return $this->redirectToRoute('user_action_index');
+    }
+
+    /**
+     * @param User $user
+     * @param HealUser $healUser
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/heal/{id}", name="user_action_heal", methods="GET")
+     */
+    public function heal(User $user, HealUser $healUser){
+        $healUser->heal($user);
         return $this->redirectToRoute('user_action_index');
     }
 }

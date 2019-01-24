@@ -1,12 +1,13 @@
 {% block message %}
     {% for message in app.flashes('error') %}
-        <div class="callout alert">
+        <div  class="alert alert-danger" role="alert">
             <h6 class="text-center">{{ message }}</h6>
         </div>
+
     {% endfor %}
 
     {% for message in app.flashes('success') %}
-        <div class="callout success">
+        <div  class="alert alert-success" role="alert">
             <h6 class="text-center">{{ message }}</h6>
         </div>
     {% endfor %}

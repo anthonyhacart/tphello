@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\WeaponUser;
+use App\Entity\User;
 use App\Form\Type\QualityType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,7 +35,12 @@ class WeaponUserType extends AbstractType
             ->add('quality', QualityType::class)
             ->add('ammunition')
             ->add('active')
-            ->add('user')
+            ->add('user',EntityType::class, [
+                'class' => User::class,
+
+                // uses the User.username property as the visible option string
+                'choice_label' => 'username',
+            ])
             ->add('weapon')
             ->add('submit', SubmitType::class, ['label_format' => 'Ajout d\'une arme'])
         ;

@@ -28,10 +28,22 @@ class ShootWeapon{
 
         if($weaponUser instanceof WeaponUser){
 
-            $this->session->getFlashBag()->add('success', 'Bang Bang');
+            if($user instanceof User){
+                $this->session->getFlashBag()->add('success', 'you shooted in the air');
+                $weaponUser->setAmmunition($weaponUser->getAmmunition() - 1);
+            }else{
+                if(rand(0,1) === 1)// 1 sur 2
+                {
+                    $this->session->getFlashBag()->add('success', 'Bang Bang');
+                    $user->setHealth($user->getHealth()-($weaponUser->getQuality()*$weaponUser->getWeapon()->getDamage()));
+                    $weaponUser->setAmmunition($weaponUser->getAmmunition() - 1);
+                }
+                else{
+                    $this->session->getFlashBag()->add('error', 'you missed the shoot gros noob');
+                    $weaponUser->setAmmunition($weaponUser->getAmmunition() - 1);
+                }
+            }
 
-            $user->setHealth($user->getHealth()-($weaponUser->getQuality()*$weaponUser->getWeapon()->getDamage()));
-            $weaponUser->setAmmunition($weaponUser->getAmmunition() - 1);
 
             $this->em->flush();
         }
