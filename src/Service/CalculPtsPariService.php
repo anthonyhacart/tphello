@@ -1,39 +1,37 @@
 <?php
+
 namespace App\Service;
 
 use App\Entity\Bet;
 
-class CalculPtsPariService{
+class CalculPtsPariService
+{
     private const PERFECT_RESULT = 3;
     private const CORRECT_RESULT = 1;
+    private const BAD_RESULT = -1;
 
-//Créer un service qui calcule les gains potentiels de l'utilisateur sur chaque match
-//  Si l'utilisateur à la bonne issue du match ratio de 1
-//  Si l'utilisateur à le score exacte le ratio est de 3
-//  Calcul Gain: Amount * Rating * ratio
-
-    public function potentialWin(Bet $bet){
+    public function potentialWin(Bet $bet)
+    {
         $match = $bet->getGame();
-        if($match->getScoreTeamA() === $bet->getScoreTeamA() &&
-        $match->getScoreTeamB() === $bet->getScoreTeamB())
-        {
-            //le perfect
-            return $bet->getAmout() * $match->getRating() * self::PERFECT_RESULT;
-        }
-        if($match->getScoreTeamA() > 6 && $bet->getScoreTeamA() > 6)
-        {
-            //team A qui win,
-            return $bet->getAmout() * $match->getRating() * self::CORRECT_RESULT;
-        }
 
-        if($match->getScoreTeamB() > 6 && $bet->getScoreTeamB() > 6)
-        {
-            //team A qui win,
-            return $bet->getAmout() * $match->getRating() * self::CORRECT_RESULT;
-        }
+        //perfect
+        if ($match->getScoreTeamA() === $bet->getScoreTeamA() &&
+            $match->getScoreTeamB() === $bet->getScoreTeamB())
+            return self::PERFECT_RESULT;
 
-        // sinon il a perdu, il perd sa mise
-        return $bet->getAmout() * -1;
+        //bon result mais pas parfait
+        if (
+            ($match->getScoreTeamA() > $match->getScoreTeamB() && $bet->getScoreTeamA() > $bet->getScoreTeamB()) //win team A
+            ||
+            ($match->getScoreTeamB() > $match->getScoreTeamA() && $bet->getScoreTeamB() > $match->getScoreTeamB()) //win team B
+            ||
+            ($match->getScoreTeamA() - $match->getScoreTeamB() === 0) && ($bet->getScoreTeamA() - $bet->getScoreTeamB() === 0)
+        )
+            return self::CORRECT_RESULT;
 
+
+
+        //perdu
+        return self::BAD_RESULT;
     }
 }

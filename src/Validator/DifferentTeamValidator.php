@@ -16,9 +16,9 @@ class DifferentTeamValidator extends ConstraintValidator
             return;
         }
 
-        if ($this->isLivreExistant($value)) {
+        if ($this->isSameTeam($value)) {
             $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ livre }}', $value->getTitre())
+                ->setParameter('{{ value }}', $value->getTeamA()->getName())
                 ->addViolation();
         }
     }
