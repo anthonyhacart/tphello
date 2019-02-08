@@ -25,7 +25,7 @@ class CalculPtsPariService
             ||
             ($match->getScoreTeamB() > $match->getScoreTeamA() && $bet->getScoreTeamB() > $match->getScoreTeamB()) //win team B
             ||
-            ($match->getScoreTeamA() - $match->getScoreTeamB() === 0) && ($bet->getScoreTeamA() - $bet->getScoreTeamB() === 0)
+            ($match->getScoreTeamA() - $match->getScoreTeamB() === 0) && ($bet->getScoreTeamA() - $bet->getScoreTeamB() === 0) //draw
         )
             return self::CORRECT_RESULT;
 

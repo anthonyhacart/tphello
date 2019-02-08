@@ -21,8 +21,13 @@
                 <td>{{ team.name }}</td>
                 <td>{{ team.flag }}</td>
                 <td>
+<<<<<<< HEAD
                     <a href="{{ path('admin_team_show', {'id': team.id}) }}">show</a>
                     <a href="{{ path('admin_team_edit', {'id': team.id}) }}">edit</a>
+=======
+                    <a href="{{ path('team_show', {'id': team.id}) }}">show</a>
+                    <a href="{{ path('team_edit', {'id': team.id}) }}">edit</a>
+>>>>>>> ba5fbdd83a9feb51024776cd8b636bd2c0fdb77c
                 </td>
             </tr>
         {% else %}
@@ -33,5 +38,9 @@
         </tbody>
     </table>
 
+<<<<<<< HEAD
     <a href="{{ path('admin_team_new') }}">Create new</a>
+=======
+    <a href="{{ path('team_new') }}">Create new</a>
+>>>>>>> ba5fbdd83a9feb51024776cd8b636bd2c0fdb77c
 {% endblock %}

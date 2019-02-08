@@ -111,13 +111,13 @@ class CalculRatioTest extends TestCase
         $team2 = (new Team())->setName("C9");
 
         $game->setScoreTeamA(5)
-            ->setScoreTeamB(5)
+            ->setScoreTeamB(3)
             ->setDate(new DateTime())
             ->setTeamB($team1)
             ->setTeamA($team2);
         $bet->setDate(new DateTime())
             ->setScoreTeamA(3)
-            ->setScoreTeamB(3)
+            ->setScoreTeamB(1)
             ->setAmout(50)
             ->setGame($game);
         $calculator = new CalculPtsPariService();

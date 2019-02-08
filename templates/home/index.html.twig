@@ -5,6 +5,7 @@
 {% block body %}
 
     <div class="panel">
+<<<<<<< HEAD
         <h1 class="title">TP Mid Saison</h1>
         <h2>Gestion de pari sur des match <br/>
             <strong>Team</strong> : id, name<Br/>
@@ -59,12 +60,40 @@
         </h3>
         <h3><span class="pt">11-b - </span>Afficher le gain ( en vert )ou la perte ( en rouge ) sur la page de detail du
             match <span class="point">1pt</span></h3>
+=======
+        <h2>Finir le test du service de calcul de score !</h2>
+        <h2>Correction !</h2>
+    </div>
+
+    <div class="panel">
+        <h2>Aujourd'hui c'est vendredi donc c'est en mode chill ! => les traductions</h2>
+>>>>>>> ba5fbdd83a9feb51024776cd8b636bd2c0fdb77c
         <h3>
-            <span class="pt">12 - </span>Tester le service qui calcul les gains<span class="point">3pt</span>
+            composer require symfony/translation
         </h3>
+        <h2>{{ 'totolaricot'|trans }}</h2>
+        <h2>{% trans %}totolaricot{% endtrans %}</h2>
+        <h3>php bin/console c:c</h3>
+        <h3>je suis roro : {% trans with {'%name%': 'Zimzim'} %}admin.roro{% endtrans %}</h3>
+        <h3>je suis roro toujours english: {% trans with {'%name%': 'Zimzim'} into 'en' %}admin.roro{% endtrans %}</h3>
+        <h2>{{ roro }}</h2>
         <h3>
-            <span class="pt">Bonus - </span>Respect des bonnes pratiques ( naming, ...) <span class="point">2pt</span>
+            {% set toto = 1 %}
+            {% transchoice toto %}
+            {0} pas de toto|{1} 1 toto|]1,Inf[ il y a %count% de toto
+            {% endtranschoice %}
         </h3>
+        <a href="{{ path('home_index_language', {'_locale': 'en'}) }}">Link to english</a> ----
+        <a href="{{ path('home_index_language', {'_locale': 'fr'}) }}">Lien vers france</a> ----
+        <a href="{{ path('home_index_language.en') }}">Link to english</a> ----
+        <a href="{{ path('home_index_language.fr') }}">Lien vers france</a>
+    </div>
+
+    <div class="panel">
+        <h3>TP d'aujourdui</h3>
+        <h2>Allez ici <a href="{{ path('home_team') }}">Mes matchs</a></h2>
+        <h2>1 - Lors du click sur "Créer un match pour cette équipe", modifier le formulaire pour que seul le choix de l'équipe B sois disponible et setter l'équipe clicker en tans que equipe A => ( modification du form )</h2>
+        <h2>2 - dans ce même formulaire modifier le choix de l'equipe B pour qu'elle ne puisse pas être égale à l'équipe A => création/Modification du formType team</h2>
     </div>
 
 {% endblock %}

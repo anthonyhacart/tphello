@@ -6,6 +6,6 @@
     {% if is_granted('ROLE_USER') %}
         <a href="{{ path('app_logout') }}">Deconnexion</a>
     {% else %}
-        <a href="{{ path('app_login') }}">Connexon</a>
+        <a href="{{ path('app_login') }}">Connexion</a>
     {% endif %}
 {% endblock %}

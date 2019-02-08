@@ -25,8 +25,13 @@
                 <td>{{ game.date ? game.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ game.rating }}</td>
                 <td>
+<<<<<<< HEAD
                     <a href="{{ path('admin_game_show', {'id': game.id}) }}">show</a>
                     <a href="{{ path('admin_game_edit', {'id': game.id}) }}">edit</a>
+=======
+                    <a href="{{ path('game_show', {'id': game.id}) }}">show</a>
+                    <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
+>>>>>>> ba5fbdd83a9feb51024776cd8b636bd2c0fdb77c
                 </td>
             </tr>
         {% else %}
@@ -37,5 +42,9 @@
         </tbody>
     </table>
 
+<<<<<<< HEAD
     <a href="{{ path('admin_game_new') }}">Create new</a>
+=======
+    <a href="{{ path('game_new') }}">Create new</a>
+>>>>>>> ba5fbdd83a9feb51024776cd8b636bd2c0fdb77c
 {% endblock %}
