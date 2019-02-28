@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActionUserRepository")
@@ -23,6 +24,7 @@ class ActionUser
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"TOP", "BOTTOM", "LEFT", "RIGHT"})
      */
     private $direction;
 
@@ -84,6 +86,8 @@ class ActionUser
     public function setPositionX($positionX)
     {
         $this->positionX = $positionX;
+
+        return $this;
     }
 
     /**
@@ -100,6 +104,9 @@ class ActionUser
     public function setPositionY($positionY)
     {
         $this->positionY = $positionY;
+
+        return $this;
+
     }
 
     /**
@@ -116,5 +123,8 @@ class ActionUser
     public function setUser(User $user)
     {
         $this->user = $user;
+
+        return $this;
+
     }
 }

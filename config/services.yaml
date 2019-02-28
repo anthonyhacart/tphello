@@ -44,3 +44,7 @@ services:
     App\EventListener\LoginListener:
         tags:
             - { name: kernel.event_listener, event: user.create, priority: 0 }
+
+    App\EventListener\MoveListener:
+        tags:
+            - { name: kernel.event_listener, event: user.move, method: 'onUserMove', priority: 256 }

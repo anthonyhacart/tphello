@@ -12,7 +12,8 @@ use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-class UserSubscriber implements EventSubscriberInterface{
+class UserSubscriber implements EventSubscriberInterface
+{
 
     private $encoder;
     private $entityManager;
@@ -32,26 +33,28 @@ class UserSubscriber implements EventSubscriberInterface{
         ];
     }
 
-    public function onAuthenticationFailure( AuthenticationFailureEvent $event )
+    public function onAuthenticationFailure(AuthenticationFailureEvent $event)
     {
 
         echo 'failed login ! ';
     }
 
-    public function onSecurityInteractiveLogin( InteractiveLoginEvent $event )
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
-         echo 'login ok ! : '.$event->getAuthenticationToken()->getUser()->getEmail();
+        echo 'login ok ! : ' . $event->getAuthenticationToken()->getUser()->getEmail();
     }
 
-    public function userPersist(UserEvent $event){
+    public function userPersist(UserEvent $event)
+    {
 
         $this->entityManager->persist($event->getUser());
         $this->entityManager->flush();
     }
 
-    public function userEditPassword(UserEvent $event){
+    public function userEditPassword(UserEvent $event)
+    {
 
-        if($event->getUser()->getPlainPassword() !== ''){
+        if ($event->getUser()->getPlainPassword() !== '') {
             $mdp = $this->encoder->encodePassword($event->getUser(), $event->getUser()->getPlainPassword());
             $event->getUser()->setPassword($mdp);
         }
