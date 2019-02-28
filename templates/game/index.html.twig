@@ -20,8 +20,8 @@
         {% for game in games %}
             <tr>
                 <td>{{ game.id }}</td>
-                <td>{{ game.scoreTeamA }}</td>
-                <td>{{ game.scoreTeamB }}</td>
+                <td>{{ game.teamA.name ~ " " ~ game.scoreTeamA }}</td>
+                <td>{{ game.teamA.name ~ " " ~ game.scoreTeamB }}</td>
                 <td>{{ game.date ? game.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ game.rating }}</td>
                 <td>
@@ -36,6 +36,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('game_new') }}">Create new</a>
 {% endblock %}

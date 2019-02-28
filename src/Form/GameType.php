@@ -44,6 +44,8 @@ class GameType extends AbstractType
         $form = $event->getForm();
         $match = $event->getData();
 
+        $match->setDate(new \DateTime());
+
         if ($this->teamA !== null && $this->teamA instanceof Team) {
             $match->setTeamA($this->teamA);
 
