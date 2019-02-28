@@ -10,7 +10,6 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Flag</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,8 +17,7 @@
         {% for team in teams %}
             <tr>
                 <td>{{ team.id }}</td>
-                <td>{{ team.name }}</td>
-                <td>{{ team.flag }}</td>
+                <td><i class="{{ team.flag }} flag"></i> {{ team.name }}</td>
                 <td>
                     <a href="{{ path('game_new', {'id': team.id}) }}">Créer un match pour cette équipe</a>
                 </td>
