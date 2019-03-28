@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Repository\UserProductRepository;
 use App\Service\ProductImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +23,13 @@ class ProductController extends AbstractController
      *
      * @IsGranted("ROLE_USER")
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, UserProductRepository $userProductRepository): Response
     {
+        $userProducts = $userProductRepository->findBy(['user' => $this->getUser()]);
+
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+            'userProducts' => $userProducts
         ]);
     }
 

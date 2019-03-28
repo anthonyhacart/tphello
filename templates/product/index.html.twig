@@ -3,18 +3,22 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+    <h1>Product index
+        {% if userProducts is not empty %}<a href="#">
+            <button>ACHETER</button>
+        </a>{% endif %}
+    </h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>CreatedAt</th>
-                <th>Quantity</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>CreatedAt</th>
+            <th>Quantity</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for product in products %}
@@ -26,7 +30,7 @@
                 <td>{{ product.quantity }}</td>
                 <td>
                     {% if is_granted('ROLE_USER') %}
-                    <a href="{{ path('user_product_new', {'product' : product.id}) }}"> Ajouter au panier</a>
+                        <a href="{{ path('user_product_new', {'product' : product.id}) }}"> Ajouter au panier</a>
                     {% endif %}
                     <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
                     <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
