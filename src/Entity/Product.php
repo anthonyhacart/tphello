@@ -39,7 +39,7 @@ class Product
     private $quantity;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @Assert\Image()
      */
